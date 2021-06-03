@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "mongoose": "5.12.12",
+    "passport": "0.4.1",
+    "passport-google-oauth": "2.0.0",
+    "socket.io": "4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.7"
+  },
+  "name": "chatlist-server",
+  "description": "ChatList is a service that displays the list of available rooms, authenticated user can join, comment and create rooms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maytheu/chatlist-server.git"
+  },
+  "keywords": [
+    "socket",
+    "passportjs"
+  ],
+  "author": "maytheu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maytheu/chatlist-server/issues"
+  },
+  "homepage": "https://github.com/maytheu/chatlist-server#readme"
+}
