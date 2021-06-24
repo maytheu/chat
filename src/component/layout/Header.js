@@ -1,13 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ page }) => {
+  let success = true;
   return (
     <header>
-      <div className="title">ChatList</div>
+      <div className="title">
+        <Link to="/">ChatList</Link>
+      </div>
       <div className="account">
-        <div className="name">Adetunji</div>
-        <div className="user">reate a new room</div>
-        <div className="user">Signin</div>
+        {success ? (
+          <div className="account">
+            {page ? <div className="user">join</div> : "Adetunji"}
+            <div className="user">
+              <Link to="/create">reate a new room</Link>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="user">{success ? "signout" : "signin"}</div>
       </div>
     </header>
   );

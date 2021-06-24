@@ -6,14 +6,15 @@ header {
   padding: 10px 25px;
 }
 
-.title {
-  font-size: 2em;
+.title a {
+  font-size: 2.2em;
+  color: white;
+  font-weight: 600;
 }
 
 .account {
   display: flex;
   align-items: center;
-  padding-right: 25px;
 }
 
 .name {
@@ -24,6 +25,12 @@ header {
   background-color: #39afea;
   padding: 10px;
   margin-right: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.user a {
+  color: white;
 }
 
 section {
@@ -43,49 +50,95 @@ section {
 }
 
 .room_title h2 {
-  font-size: 1.7em;
-  margin: 0 auto;
-  padding: 10px;
+  font-size: 1.8em;
+  padding: 10px 0 0 10px;
   font-weight: 600;
-}
-
-
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 10px;
+}
+
+.room_member {
+  padding: 5px;
+}
+
+.room_online {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.chatroom {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #f4f4fb;
+  color: #5e69ee;
+  height: 80vh;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #5e69ee;
+  border-radius: 4px 4px 0 0;
+  height: 60px;
+  width: 100%;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.chatroom_title h3 {
+  font-size: 1.5em;
+  padding: 10px 0 0 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form {
+  display: flex;
+  border-top: 2px solid #d3d3d3;
+}
+
+.input {
+  border: none;
+  border-radius: 0;
+  padding: 1%;
+  width: 100%;
+  font-size: 1.2em;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+  cursor: pointer;
+}
+
+.newRoom {
+  width: 100%;
+  margin-top: 10%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formRoom {
+  margin:10px 0;
+  border: none;
+  border-radius: 0;
+  padding: 1%;
+  width: 100%;
+  font-size: 1.2em;
+
 }
