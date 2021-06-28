@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import io from "socket.io-client";
 
 import Header from "./layout/Header";
 import Room from "./layout/Room";
+
+let socket;
 
 const Homepage = () => {
   const room = [
@@ -14,6 +17,14 @@ const Homepage = () => {
     { title: "movies", members: 25, online: 5 },
     { title: "Codes", members: 25, online: 5 },
   ];
+  const ENDPOINT = "http://localhost:3003/";
+  useEffect(() => {
+    socket = io(ENDPOINT, { transports: ["websocket"] });
+
+    socket.on("online", ({ online }) => {
+      console.log("online", { online });
+    });
+  }, []);
 
   const showRoom = (rooms) => {
     return rooms.map(({ title, members, online }, i) => (

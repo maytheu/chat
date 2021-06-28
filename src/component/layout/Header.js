@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 
 const Header = ({ page }) => {
   let success = true;
+
+  const join = (e) => {
+    e.preventDefault();
+    //push new room to the user db
+  };
   return (
     <header>
       <div className="title">
@@ -11,7 +16,13 @@ const Header = ({ page }) => {
       <div className="account">
         {success ? (
           <div className="account">
-            {page ? <div className="user">join</div> : "Adetunji"}
+            {page ? (
+              <div className="user" onClick={(e) => join(e)}>
+                join
+              </div>
+            ) : (
+              "Adetunji"
+            )}
             <div className="user">
               <Link to="/create">reate a new room</Link>
             </div>

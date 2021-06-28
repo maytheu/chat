@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Header from "./layout/Header";
 import Input from "./layout/Input";
 
 const NewRoom = (props) => {
+  const [room, setRoom] = useState("");
+  const [member, setMember] = useState("");
+  const [msg, setMsg] = useState("");
+
+  const create = (e) => {
+    e.preventDefault();
+    if (room !== "") {
+      //send data to the db
+      props.history.push(`/${room}`);
+    } else {
+      alert("Add a room title");
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -18,17 +32,29 @@ const NewRoom = (props) => {
             <div className="newRoom">
               <Input
                 type="text"
-                value=""
+                value={room}
+                setValue={setRoom}
                 className="formRoom"
                 placeholder="create new room"
               />
               <Input
                 type="number"
-                value=""
+                value={member}
+                setValue={setMember}
                 className="formRoom"
                 placeholder="Maximum member"
               />
-              <button className="sendButton">Create</button>
+              <Input
+                type="text"
+                value={msg}
+                setValue={setMsg}
+                className="formRoom"
+                placeholder="Room message"
+              />
+
+              <button className="sendButton" onClick={(e) => create(e)}>
+                Create
+              </button>
             </div>
           </form>
         </div>

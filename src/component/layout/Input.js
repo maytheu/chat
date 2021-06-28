@@ -8,7 +8,7 @@ const Input = ({ className, placeholder, type, value, setValue, enter }) => {
       type={type}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      onKeyPress={(e) => (e.key === "Enter" ? enter(e) : null)}
+      // onKeyPress={(e) => (e.key === "Enter" ? enter(e) : null)}
     />
   );
 };
