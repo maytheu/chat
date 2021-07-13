@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = ({ page }) => {
-  let success = true;
+  let success = false;
 
   const join = (e) => {
     e.preventDefault();
@@ -30,7 +30,13 @@ const Header = ({ page }) => {
         ) : (
           ""
         )}
-        <div className="user">{success ? "signout" : "signin"}</div>
+        <div className="user">
+          {success ? (
+            <a href="auth/logout">signout</a>
+          ) : (
+            <a href="auth/google">signin</a>
+          )}
+        </div>
       </div>
     </header>
   );
