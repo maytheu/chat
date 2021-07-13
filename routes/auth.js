@@ -1,13 +1,24 @@
-const express = require('express')
-const router = express.Router()
-const passport = require('passport')
-const googleStrategy = require('passport-google-oauth20').Strategy
-require("dotenv").config();
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 
-// passport.use(new googleStrategy)
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
 
-router.get('/', (req, res)=>{
-    res.send('testing auth')
-})
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    // res.json({ success: true });\
+    res.redirect("/");
+  }
+);
 
-module.exports=router
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+module.exports = router;
