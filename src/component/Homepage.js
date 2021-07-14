@@ -7,7 +7,7 @@ import Room from "./layout/Room";
 
 let socket;
 
-const Homepage = () => {
+const Homepage = ({ ...rest }) => {
   const room = [
     { title: "Code", members: 25, online: 5 },
     { title: "Coders", members: 15, online: 5 },
@@ -18,9 +18,9 @@ const Homepage = () => {
     { title: "Codes", members: 25, online: 5 },
   ];
   const ENDPOINT = "http://localhost:3003/";
+
   useEffect(() => {
     socket = io(ENDPOINT, { transports: ["websocket"] });
-
     socket.on("online", ({ online }) => {
       console.log("online", { online });
     });

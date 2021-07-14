@@ -5,9 +5,9 @@ export default function Protected({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) => {
-        props.success ? <Component {...props} /> : <Redirect to="/" />;
-      }}
+      render={(props) =>
+        rest.user.isUserAuth ? <Component {...props} user={rest.user} /> : <Redirect to="/" />
+      }
     />
   );
 }

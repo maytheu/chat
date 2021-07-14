@@ -9,12 +9,12 @@ import Input from "./layout/Input";
 let socket;
 
 const ChatRoom = (props) => {
-  let name = "Adetunj";
   let admin = "Adetunji";
 
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const name = props.user.name
 
   useEffect(() => {
     const room = props.match.params.room;
@@ -80,7 +80,6 @@ const ChatRoom = (props) => {
             </div>
           </div>
           <ScrollToBottom className="messages">{msgs()}</ScrollToBottom>
-          {name || admin ? (
             <form>
               <Input
                 type="text"
@@ -93,9 +92,6 @@ const ChatRoom = (props) => {
                 Send
               </button>
             </form>
-          ) : (
-            ""
-          )}
         </div>
       </section>
     </div>
