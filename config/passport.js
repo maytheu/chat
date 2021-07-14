@@ -1,36 +1,24 @@
 const passport = require("passport");
 const googleStrategy = require("passport-google-oauth20").Strategy;
 require("dotenv").config();
-const mysql = require("mysql2");
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-  password: "",
-});
+const pool = require("./query");
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser((id, done) => {
   pool.getConnection((err, connection) => {
     if (err) throw err; // not connected!
     console.log(`connection id ${connection.threadId}`);
-
     connection.query(
       "SELECT * FROM user WHERE profileId = ?",
-      [id],
+      [id[0].profileId],
       (err, user) => {
         if (err) throw err;
-
         connection.release();
 
-        done(null, user);
+        done(null, id);
       }
     );
   });
@@ -41,8 +29,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "auth/google/callback",
-      proxy: true
+      callbackURL: "/auth/google/callback",
+      proxy: true,
     },
     async function (accessToken, refreshToken, profile, done) {
       pool.getConnection((err, connection) => {
@@ -59,8 +47,8 @@ passport.use(
             if (existingUser.length > 0) return done(null, existingUser);
 
             connection.query(
-              "INSERT INTO user SET profileId = ?, name = ?",
-              [profile.id, profile.displayName],
+              "INSERT INTO user SET profileId = ?, name = ?, email = ?",
+              [profile.id, profile.displayName, profile.emails[0].value],
               (err, user) => {
                 connection.release();
 
