@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import Header from "./layout/Header";
 import Input from "./layout/Input";
@@ -11,8 +12,15 @@ const NewRoom = (props) => {
   const create = (e) => {
     e.preventDefault();
     if (room !== "") {
-      //send data to the db
-      props.history.push(`/${room}`);
+      const data = { room_name: room, room_Message: msg, max_mem: member };
+      axios.post("/api/room/new", { data }).then((res) => {
+        if (res.data.success) {
+          props.history.push(`/${room}`);
+        } else {
+          alert("Error creating room");
+          props.history.push(`/`);
+        }
+      });
     } else {
       alert("Add a room title");
     }

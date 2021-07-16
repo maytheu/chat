@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
+import axios from 'axios'
 
 import Header from "./layout/Header";
 import Room from "./layout/Room";
@@ -8,18 +9,24 @@ import Room from "./layout/Room";
 let socket;
 
 const Homepage = ({ ...rest }) => {
-  const room = [
-    { title: "Code", members: 25, online: 5 },
-    { title: "Coders", members: 15, online: 5 },
-    { title: "js", members: 25, online: 5 },
-    { title: "C", members: 25, online: 15 },
-    { title: "fiction", members: 25, online: 5 },
-    { title: "movies", members: 25, online: 5 },
-    { title: "Codes", members: 25, online: 5 },
-  ];
+  // const room = [
+  //   { title: "Code", members: 25, online: 5 },
+  //   { title: "Coders", members: 15, online: 5 },
+  //   { title: "js", members: 25, online: 5 },
+  //   { title: "C", members: 25, online: 15 },
+  //   { title: "fiction", members: 25, online: 5 },
+  //   { title: "movies", members: 25, online: 5 },
+  //   { title: "Codes", members: 25, online: 5 },
+  // ];
+  const [room, setRoom]=useState([])
   const ENDPOINT = "http://localhost:3003/";
 
+
+
   useEffect(() => {
+    axios.get('/api/room').then(res=>{
+      setRoom(res.data.rooms)
+    })
     socket = io(ENDPOINT, { transports: ["websocket"] });
     socket.on("online", ({ online }) => {
       console.log("online", { online });
@@ -27,10 +34,10 @@ const Homepage = ({ ...rest }) => {
   }, []);
 
   const showRoom = (rooms) => {
-    return rooms.map(({ title, members, online }, i) => (
-      <div key={i}>
-        <Link to={title}>
-          <Room title={title} members={members} online={online} />
+    return rooms.map(({ room_name, max_member, online, id }) => (
+      <div key={id}>
+        <Link to={room_name}>
+          <Room title={room_name} members={max_member} online={online} />
         </Link>
       </div>
     ));
