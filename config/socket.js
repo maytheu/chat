@@ -24,7 +24,7 @@ const socket = (io) => {
       socket.join(room);
 
       cb();
-    });
+    }); 
 
     socket.on("create", ({ room, msg, admin, name }, cb) => {
       users.push({ id: socket.id, name, room, admin });
@@ -54,7 +54,6 @@ const socket = (io) => {
       //save message
       cb();
     });
-
 
     socket.on("disconnect", () => {
       console.log("User disconnected");
